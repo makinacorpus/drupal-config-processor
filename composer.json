@@ -1,11 +1,21 @@
 {
     "name": "makinacorpus/drupal-config-processor",
-    "type": "drupal-drush",
-    "extra": {
-        "drush": {
-            "services": {
-                "drush.services.yml": "^11"
-            }
+    "type": "drupal-module",
+    "description": "Drupal Yaml processor",
+    "homepage": "https://github.com/makinacorpus/drupal-config-processor",
+    "license" : "GPL-2.0-or-later",
+    "authors" : [
+        {
+            "name" : "Sylvain Lavielle",
+            "email" : "sylvain.lavielle@makina-corpus.com"
+        },
+        {
+            "name" : "Makina Corpus",
+            "homepage" : "http://makina-corpus.com"
         }
+    ],
+    "support": {
+        "issues": "https://github.com/makinacorpus/drupal-static-passthrough/issues",
+        "source": "https://github.com/makinacorpus/drupal-static-passthrough"
     }
 }
