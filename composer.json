@@ -1,5 +1,5 @@
 {
-    "name": "org/config_processor",
+    "name": "makinacorpus/drupal-config-processor",
     "type": "drupal-drush",
     "extra": {
         "drush": {
