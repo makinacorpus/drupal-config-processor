@@ -1,17 +1,17 @@
 source-dir: '/var/www/config/sync'
 rules:
 
-  # Exclusion de certains fichiers de la copie
+  # Exclude some file off the process.
   - description: 'Ignore file'
     match:
       - '/^core\.extension\.yml$/'
       - '/^update\.settings\.yml$/'
-      # Ne pas traiter les fichiers spécifiques aux langues
+      # Do not process language related files.
       - '/^language\//'
     actions:
       skip: ~
 
-  # Suppression de certains attributs de la source
+  # Remove some unexpected Yaml attributes.
   - description: 'Remove unexpected attributes from YAML data'
     actions:
       remove-props:
@@ -19,8 +19,8 @@ rules:
           - uuid
           - _core
 
-  # Envoi de certains fichiers vers le répertoire du profile OMAE
-  - description: 'Copy to common profile'
+  # Copy some files to OMAE profile config/install.new dir
+  - description: 'Copy to omae profile'
     match:
       # Liste des blocs customs à exporter
       - '/^block\.block\.blocintegrezlacommunaute\.yml$/'
@@ -39,8 +39,8 @@ rules:
         dest: '/var/www/public/profiles/custom/omae/config/install.new'
       skip: ~
 
-  # Envoi des fichiers restant dans le répertoire du profil commun
-  - description: 'Copy to omae profile'
+  # Copy some files to common profile config/install.new dir
+  - description: 'Copy to common profile'
     actions:
       save:
         dest: '/var/www/local-dev-depencencies/chalets_base/config/install.new'

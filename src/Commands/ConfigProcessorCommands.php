@@ -8,7 +8,7 @@ use Drush\Commands\DrushCommands;
 /**
  * Drush commands class.
  */
-class ChaletsDevCommands extends DrushCommands {
+class ConfigProcessorCommands extends DrushCommands {
 
   /**
    * Process config files and apply rules and actions to them.

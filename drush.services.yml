@@ -1,5 +1,5 @@
 services:
   config_processor.commands:
-    class: \Drupal\config_processor\Commands\ChaletsDevCommands
+    class: \Drupal\config_processor\Commands\ConfigProcessorCommands
     tags:
       - { name: drush.command }
