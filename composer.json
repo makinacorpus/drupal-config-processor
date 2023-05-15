@@ -1,0 +1,11 @@
+{
+    "name": "org/config_processor",
+    "type": "drupal-drush",
+    "extra": {
+        "drush": {
+            "services": {
+                "drush.services.yml": "^11"
+            }
+        }
+    }
+}

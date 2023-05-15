@@ -1,0 +1,4 @@
+name: Config processor
+type: module
+description: 'Process YAML config files'
+core_version_requirement: '^10'

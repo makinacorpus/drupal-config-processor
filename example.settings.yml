@@ -1,0 +1,46 @@
+source-dir: '/var/www/config/sync'
+rules:
+
+  # Exclusion de certains fichiers de la copie
+  - description: 'Ignore file'
+    match:
+      - '/^core\.extension\.yml$/'
+      - '/^update\.settings\.yml$/'
+      # Ne pas traiter les fichiers spécifiques aux langues
+      - '/^language\//'
+    actions:
+      skip: ~
+
+  # Suppression de certains attributs de la source
+  - description: 'Remove unexpected attributes from YAML data'
+    actions:
+      remove-props:
+        props:
+          - uuid
+          - _core
+
+  # Envoi de certains fichiers vers le répertoire du profile OMAE
+  - description: 'Copy to common profile'
+    match:
+      # Liste des blocs customs à exporter
+      - '/^block\.block\.blocintegrezlacommunaute\.yml$/'
+      - '/^block\.block\.cartelogements\.yml$/'
+      # Liste des blocs views
+      - '/^block\.block\.views_block__actualites_block_1\.yml$/'
+      - '/^block\.block\.views_block__conseils_astuces_block_1\.yml$/'
+      - '/^block\.block\.views_block__faqs_block_1\.yml$/'
+      - '/^block\.block\.views_block__temoignages_block_1\.yml$/'
+      # Liste des blocs du thème omae
+      - '/^block\.block\.omae_theme_[^\.]+\.yml$/'
+      - '/\.conseil_astuce\./'
+      - '/\.conseils_astuces\./'
+    actions:
+      save :
+        dest: '/var/www/public/profiles/custom/omae/config/install.new'
+      skip: ~
+
+  # Envoi des fichiers restant dans le répertoire du profil commun
+  - description: 'Copy to omae profile'
+    actions:
+      save:
+        dest: '/var/www/local-dev-depencencies/chalets_base/config/install.new'
