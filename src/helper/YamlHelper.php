@@ -51,16 +51,11 @@ class YamlHelper {
    *
    * @param string $path
    *   Yaml file path.
-   * @param array|null $yaml
-   *   Yaml to return instead of reading it from file.
    *
    * @return array
    *   Yaml data.
    */
-  public static function getYaml(string $path, array $yaml = NULL): array {
-    if ($yaml !== NULL) {
-      return $yaml;
-    }
+  public static function getYaml(string $path): array {
     return Yaml::decode(file_get_contents($path));
   }
 

@@ -96,7 +96,7 @@ class ConfigProcessor {
    */
   protected function processRules(string $filePathFromSourceDir): array {
     $rulesReport = [];
-    $yaml = NULL;
+    $yaml = YamlHelper::getYaml($this->configSourceDir . DIRECTORY_SEPARATOR . $filePathFromSourceDir);
     foreach ($this->rules as $rule) {
 
       $breakRules = FALSE;
@@ -192,7 +192,6 @@ class ConfigProcessor {
           break;
 
         case 'remove-props':
-          $yaml = YamlHelper::getYaml($this->configSourceDir . DIRECTORY_SEPARATOR . $filePathFromSourceDir, $yaml);
           [
             'yaml' => $yaml,
             'report' => $removePropsReport,
@@ -201,7 +200,6 @@ class ConfigProcessor {
           break;
 
         case 'save':
-          $yaml = YamlHelper::getYaml($this->configSourceDir . DIRECTORY_SEPARATOR . $filePathFromSourceDir, $yaml);
           $saveYamlReport = YamlHelper::saveYaml($value['dest'], $filePathFromSourceDir, $yaml);
           $actionReport[] = str_repeat(self::VERBOSE_INDENT, 3) . "- " . str_repeat(self::VERBOSE_INDENT, 3) . "- " . $saveYamlReport;
           break;
