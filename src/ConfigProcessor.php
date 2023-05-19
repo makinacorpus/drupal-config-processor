@@ -6,6 +6,7 @@ use Drupal\config_processor\helper\FileSystemHelper;
 use Drupal\config_processor\helper\MiscHelper;
 use Drupal\config_processor\helper\YamlHelper;
 use Drupal\Core\Serialization\Yaml;
+use Drush\Drush;
 use Drush\Exceptions\CommandFailedException;
 use JetBrains\PhpStorm\ArrayShape;
 
@@ -42,6 +43,18 @@ class ConfigProcessor {
       throw new CommandFailedException(dt('Settings file "@filename" does not exist', ['@filename' => $settingsFilePath]));
     }
 
+    // Loading and parsing command configuration file.
+    try {
+      $yamlSettings = Yaml::decode(file_get_contents($settingsFilePath));
+    }
+    catch (\Exception $exception) {
+      Drush::logger()->error(dt('Yaml parser raised an error loading file "@filePath": @error', [
+        '@filePath' => $settingsFilePath,
+        '@error' => $exception->getMessage(),
+      ]));
+      throw new CommandFailedException();
+    }
+
     // Validate settings files schema.
     // @todo Implement schema validation.
     // Init class properties.
@@ -49,7 +62,8 @@ class ConfigProcessor {
     [
       'source-dir' => $this->configSourceDir,
       'rules' => $this->rules,
-    ] = Yaml::decode(file_get_contents($settingsFilePath));
+    ] = $yamlSettings;
+
   }
 
   /**

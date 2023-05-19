@@ -8,6 +8,7 @@ use Drush\Drush;
  * Miscellaneous Helper functions.
  */
 class MiscHelper {
+  public const DEFAULT_SETTINGS_FILENAME = 'config-processor.settings.yml';
 
   /**
    * Replace placeholders using variable values into string.
@@ -37,6 +38,24 @@ class MiscHelper {
    */
   public static function logReport(string $report, array $values = []) {
     Drush::logger()->info(static::strVar($report, $values));
+  }
+
+  /**
+   * Settings file lookup.
+   *
+   * @return string|null
+   *   Settings file path if file was found.
+   */
+  public static function lookupSettingsFiles() {
+    $pathPart = explode(DIRECTORY_SEPARATOR, __DIR__);
+    while (count($pathPart)) {
+      array_pop($pathPart);
+      $expectedConfigFilePath = implode(DIRECTORY_SEPARATOR, $pathPart) . DIRECTORY_SEPARATOR . MiscHelper::DEFAULT_SETTINGS_FILENAME;
+      if (file_exists($expectedConfigFilePath)) {
+        return $expectedConfigFilePath;
+      }
+    }
+    return NULL;
   }
 
 }
