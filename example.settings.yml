@@ -43,4 +43,4 @@ rules:
   - description: 'Copy to common profile'
     actions:
       save:
-        dest: '/var/www/local-dev-depencencies/chalets_base/config/install.new'
+        dest: '/var/www/local-dev-dependencies/chalets_base/config/install.new'
